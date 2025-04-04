@@ -3,6 +3,12 @@
 ## Project Overview
 - This project aims to clean and prepare a dataset of cafe sales transactions using SQL. The original dataset contained issues such as inconsistent formatting, missing values, duplicate records, and incorrect data entries. The goal is to ensure data accuracy, consistency, and usability for future analysis.
 
+## Technologies Used
+- Database: MySQL
+- Query Language: SQL
+- Tools: MySQL Workbench, Kaggle (for dataset)
+- Storage: CSV files
+
 ## Dataset Information
 - **Source**: The dataset was obtained from Kaggle. You can find it [`here`](https://www.kaggle.com/datasets/ahmedmohamed2003/cafe-sales-dirty-data-for-cleaning-training).
 - **Raw Dataset**: [`Raw Dataset`](./dirty_cafe_sales.csv)
@@ -13,11 +19,6 @@
 
 ### 1. Data Import and Initial Exploration
 To preserve the raw data, we created a copy of the original table, naming it clean_cafe_sales. This approach allows for safe modifications without affecting the source data.
-
-```sql
-CREATE TABLE clean_cafe_sales LIKE dirty_cafe_sales;
-INSERT INTO clean_cafe_sales SELECT * FROM dirty_cafe_sales;
-```
 
 ### 2. Removing Duplicates
 Duplicates were identified by checking for repeated transaction IDs. We removed any duplicate records to ensure each transaction is unique.
@@ -31,12 +32,6 @@ HAVING cnt > 1;
   
 ### 3. Handling Missing and Incorrect Values
 We identified and corrected missing or invalid values in critical columns like Item, Quantity, Price Per Unit, Total Spent, Location, Transaction Dates, and Payment Method. Placeholder values ('UNKNOWN', 'ERROR', '') were replaced with NULL for clarity.
-
-```sql
-UPDATE table_name
-SET column = NULL
-WHERE TRIM(column) = 'UNKNOWN' OR TRIM(column) = 'ERROR' OR TRIM(column) = '';
-```
 
 ### 4. Calculating Missing Values
 Some records had incomplete information (e.g., missing quantity or price). We calculated the missing data when possible to avoid data loss.
@@ -76,41 +71,15 @@ WHERE item IS NULL AND price_per_unit = 3.00;
 ```
 
 ### 7. Ensure Correct Data Types
-We enforced appropriate data types to maintain data integrity and prevent errors during analysis.
-  
-```sql
-ALTER TABLE clean_cafe_sales
-MODIFY item VARCHAR(50),
-MODIFY transaction_id VARCHAR(50),
-MODIFY quantity INT,
-MODIFY price_per_unit DECIMAL(10,2),
-MODIFY total_spent DECIMAL(10,2),
-MODIFY payment_method VARCHAR(50),
-MODIFY location VARCHAR(50),
-MODIFY transaction_date DATE;
-```
+Converted fields to appropriate types (e.g., quantity as INT, total_spent as DECIMAL(10,2), transaction_date as DATE).
+
 ### 8. Add and Populate Day of Week and Month Columns
 To facilitate time-based analysis, we added columns for the day of the week and transaction month.
 
-```sql
-ALTER TABLE clean_cafe_sales 
-ADD day_of_week VARCHAR(15), 
-ADD transaction_month VARCHAR(15);
-
-UPDATE clean_cafe_sales 
-SET day_of_week = DAYNAME(transaction_date), 
-    transaction_month = MONTHNAME(transaction_date);
-```
-
-## Running the SQL Script
-To execute the cleaning process, run the following command in MySQL:
-
-```sql
-SOURCE cafe_datacleaning_script.sql;
-```
+### For full SQL implementation, refer to the attached script: [`cafe_datacleaning_script.sql`](./cafe_datacleaning_script.sql).
 
 ## Results and Output
-- The cleaned dataset is stored in [`clean_cafe_sales.csv`](./clean_cafe_sales.csv), which is now ready for analysis. The dataset now has standardized data types, corrected missing values, and no duplicate entries.
+- After the data cleaning process, the dataset is now free of duplicates, with all transaction IDs being unique. Missing values have been properly handled by replacing placeholders and recalculating quantities, prices, and totals where possible. Erroneous data entries, including incorrect dates and invalid values, have been corrected to ensure consistency. All columns have been assigned appropriate data types, preventing errors during analysis. Additionally, new time-based features, such as the day of the week and transaction month, have been added to facilitate better trend analysis. The final cleaned dataset, stored as [`clean_cafe_sales.csv`](./clean_cafe_sales.csv), is now structured, reliable, and fully prepared for further exploration and insights.
 
 ## Next Steps
 - Perform exploratory data analysis using Tableau.
