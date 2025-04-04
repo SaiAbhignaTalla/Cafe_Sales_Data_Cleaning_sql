@@ -76,7 +76,7 @@ Converted fields to appropriate types (e.g., quantity as INT, total_spent as DEC
 ### 8. Add and Populate Day of Week and Month Columns
 To facilitate time-based analysis, we added columns for the day of the week and transaction month.
 
-### For full SQL implementation, refer to the attached script: [`cafe_datacleaning_script.sql`](./cafe_datacleaning_script.sql).
+#### For full SQL implementation, refer to the attached script: [`cafe_datacleaning_script.sql`](./cafe_datacleaning_script.sql).
 
 ## Results and Output
 - After the data cleaning process, the dataset is now free of duplicates, with all transaction IDs being unique. Missing values have been properly handled by replacing placeholders and recalculating quantities, prices, and totals where possible. Erroneous data entries, including incorrect dates and invalid values, have been corrected to ensure consistency. All columns have been assigned appropriate data types, preventing errors during analysis. Additionally, new time-based features, such as the day of the week and transaction month, have been added to facilitate better trend analysis. The final cleaned dataset, stored as [`clean_cafe_sales.csv`](./clean_cafe_sales.csv), is now structured, reliable, and fully prepared for further exploration and insights.
