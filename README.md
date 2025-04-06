@@ -59,7 +59,7 @@ WHERE t1.Transaction_Date IS NULL;
 ```
 
 ### 6. Assign Missing Items Based on Price Per Unit
-- We assign item names based on known price values to fill missing item data. For missing item names priced at 3.00, we randomly assigned 'Cake' or 'Juice' to retain valuable data.
+We assign item names based on known price values to fill missing item data. For missing item names priced at 3.00, we randomly assigned 'Cake' or 'Juice' to retain valuable data.
 
 ```sql
 UPDATE clean_cafe_sales
