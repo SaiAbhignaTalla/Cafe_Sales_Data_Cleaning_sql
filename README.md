@@ -82,7 +82,7 @@ To facilitate time-based analysis, we added columns for the day of the week and 
 - After the data cleaning process, the dataset is now free of duplicates, with all transaction IDs being unique. Missing values have been properly handled by replacing placeholders and recalculating quantities, prices, and totals where possible. Erroneous data entries, including incorrect dates and invalid values, have been corrected to ensure consistency. All columns have been assigned appropriate data types, preventing errors during analysis. Additionally, new time-based features, such as the day of the week and transaction month, have been added to facilitate better trend analysis. The final cleaned dataset, stored as [`clean_cafe_sales.csv`](./clean_cafe_sales.csv), is now structured, reliable, and fully prepared for further exploration and insights.
 
 ## Next Steps
-- Perform exploratory data analysis using Tableau.
+- Perform exploratory data analysis using PowerBI.
 - Generate insights from the cleaned dataset, such as sales trends, customer behavior, and location-based analysis.
 
 
